@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Greeting App</title>
+    <style>
+        /* Import a clean modern font from Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        /* Reset basic margins and set font */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Beautiful gradient background and centered flexbox */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* The main container card styling */
+        .card {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        /* Input field beautification */
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #667eea;
+        }
+
+        /* Button beautification */
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.1s ease;
+        }
+
+        button:hover {
+            background: #5a6fe0;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Output text styling */
+        #greetingOutput {
+            margin-top: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #4a5568;
+            min-height: 27px; /* Prevents layout shift when text appears */
+        }
+
+        /* Error state styling */
+        .error {
+            color: #e53e3e !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Who are you?</h1>
+        <input type="text" id="nameInput" placeholder="Enter your name here..." autocomplete="off">
+        <button id="greetBtn">Show My Name</button>
+        <div id="greetingOutput"></div>
+    </div>
+
+    <script>
+        // Select the DOM elements
+        const nameInput = document.getElementById('nameInput');
+        const greetBtn = document.getElementById('greetBtn');
+        const greetingOutput = document.getElementById('greetingOutput');
+
+        // Function to handle the greeting logic
+        function displayGreeting() {
+            // Get the value from the input and remove extra whitespace
+            const name = nameInput.value.trim();
+
+            if (name === "") {
+                // Display error if the input is empty
+                greetingOutput.textContent = "Please enter a valid name!";
+                greetingOutput.className = "error";
+            } else {
+                // Display the customized greeting
+                greetingOutput.textContent = `✨ Hello, ${name}! ✨`;
+                greetingOutput.className = ""; // Remove error class if present
+            }
+        }
+
+        // Trigger when the button is clicked
+        greetBtn.addEventListener('click', displayGreeting);
+
+        // Allow pressing "Enter" on the keyboard to trigger the button
+        nameInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                displayGreeting();
+            }
+        });
+    </script>
+
+</body>
+</html>
